@@ -1,0 +1,180 @@
+{	
+	"doc_id": "文档id",
+	"doc_type": "BASIC",
+    "title": "文档标题",
+    "ver": "文档版本",
+    "model_id": "文档所属模块",
+    "create_time": "2018-5-9",
+    "update_time": "2018-5-9",
+	"creator": "文档创建者",
+    "editor": "最后更新人/编辑者",
+    "locked": "N",
+	"summary": "概要信息"
+	"sub_sec":[
+				{
+					"doc_id"：xx
+					"sec_type": "ASTAH",		
+					"astah_files": [
+									{"astah_id"：文件id, "astah_name": 文件名, "file_url": 路径, "create_time": 创建日期, "update_time": 更新日期},
+									{"astah_id"：文件id, "astah_name": 文件名, "file_url": 路径， "create_time": 创建日期, "update_time": 更新日期}
+									]
+					"sub_sec": []
+				},
+				{
+					"sec_id": "文档章节ID",
+					"sec_type": "BLOCK",
+					"content": "内容",
+					"doc_id": "文档id",
+					...
+					"sub_sec": [] # 空的没有子，只有usercase有子
+				},
+				{	
+					"doc_id": "文档ID"
+					"if_id":  
+					"sec_type": "IF",
+					"if_name": "I/F名"
+					"parameter":"参数"
+					"return_val": "返回值",
+					"description": "接口说明",
+					"sub_sec": [] # 空的没有子，只有usercase有子
+				},
+				{
+					"sec_id": "文档章节ID",
+					"sec_type": "USERCASE",
+					"content": "内容",
+					"doc_id": "文档id",
+					"sub_sec":[
+						{
+							"sec_type": "SPEC", #式样书
+							"sec_id"：usecase_id
+							"specs": [{"spec_type": 式样书类别, "spec_name": 式样书名称},]
+							"sub_sec": []
+						},
+						{
+							"sec_type": "SCENE", #场景
+							"sec_id"：usecase_id
+							"specs": [{"scene_id": 场景id, "scene": 场景名称},]
+							"sub_sec": []
+						},
+						{
+							"sec_id": "SEQUENCE_id"
+							"sec_type": "SEQUENCE",
+							"content": "SEQUENCE1" 
+							"sub_sec": [
+											{	
+												"sec_id": SEQUENCE_id
+												"sec_type": "RESOURCE", # 资源
+												"rsc_name": 资源名，
+												"val": ""
+												"sub_sec": [] 
+											},
+										] 
+						},
+						{
+							"sec_id": SEQUENCE_id
+							"sec_type": "SEQUENCE",
+							"content": "SEQUENCE2"
+							"sub_sec": [
+											{	
+												"sec_id": SEQUENCE_id
+												"sec_type": "RESOURCE", # 资源
+												"rsc_name": 资源名，
+												"val": ""
+												"sub_sec": [] 
+											},
+										] 
+						},
+						{ 
+							"sec_id"：usecase_id
+							"sec_type": "CONSIDER" # 考虑点
+							"considers": [
+											{
+												"consider_id": 考虑点id
+												"consider_name": 考虑名称
+												"consider_content": 考虑内容
+											}
+										]
+							"sub_sec": []
+						},
+						{
+							"sec_id": "STD_id"
+							"sec_type": "STD",
+							"content": ""
+							"sub_sec": []
+						},
+						{
+							"sec_id": STD_id
+							"sec_type": "STD",
+							"content": ""
+							"sub_sec": [] 
+						},
+						{
+						 "sec_id": usecase_id
+						 "sec_type": "DRBFM" # 原来的checklist
+						 "checklist": [
+											{
+											  name: "通用",
+											  "sub": [
+														{
+															"item_id": xx
+															name: "映像",
+															sub:[
+																	{
+																		"item_id": oo
+																		"name": "映像が表示されたまま",
+																		 sub: []
+																		 "scenes": [
+																					{scene_id: scene_1, scene: 场景1, content: "drbfm填写内容"},
+																					{scene_id: scene_2, scene: 场景2, content: "drbfm填写内容"},
+																					{scene_id: scene_3, scene: 场景3, content: "drbfm填写内容"},
+																					]
+																	},
+																	{	
+																		"item_id": oo
+																		"name": "映像が表示されない",
+																		"scenes": [
+																					{scene_id: scene_1, scene: 场景1, content: "drbfm填写内容"},
+																					{scene_id: scene_2, scene: 场景2, content: "drbfm填写内容"},
+																					{scene_id: scene_3, scene: 场景3, content: "drbfm填写内容"},
+																				]
+																	},
+																	...
+																]
+														},
+														{
+														"item_id": xx
+														name: "音声",
+														sub:[
+																{
+																	"item_id": oo
+																	"name": "音声がでない",
+																	"scenes": [
+																			{scene_id: scene_1, scene: 场景1, content: "drbfm填写内容"},
+																			{scene_id: scene_2, scene: 场景2, content: "drbfm填写内容"},
+																			{scene_id: scene_3, scene: 场景3, content: "drbfm填写内容"},
+																		]
+																},
+																{	
+																	"item_id": oo
+																	"name": "音声がとまらない",
+																	"scenes": [
+																		{scene_id: scene_1, scene: 场景1, content: "drbfm填写内容"},
+																		{scene_id: scene_2, scene: 场景2, content: "drbfm填写内容"},
+																		{scene_id: scene_3, scene: 场景3, content: "drbfm填写内容"},
+																		]
+																},
+															...
+															]
+														},
+													...
+													]
+											},
+											...
+									]
+						},	
+					]
+			]
+}
+
+
+

@@ -1,0 +1,3 @@
+# config file of project
+db1=host='192.168.37.143' dbname='spec2db_659B_1116' port='5432' user='postgres' password='pset123456'
+db2=host='192.168.37.143' dbname='spec2db_659B_1116' port='5432' user='postgres' password='pset123456'

@@ -1,0 +1,36 @@
+---
+# is_catus 是否是从catus上拿的 true or false
+# dest_list 仕向地列表
+# intro 项目简介
+# field_list 自定义字段列表
+name: {{ name }}
+is_catus: {{ is_catus }}
+user_name: {{ user_name }}
+intro: {{ intro }}
+create_time: {{ create_time }}
+update_time: {{ update_time }}
+finish_time: {{ finish_time }}
+dest_list:
+{% if dest_list %}
+{% for item in dest_list %}
+- name: {{ item.name }}
+{% endfor %}
+{% else %}
+- name:
+{% endif %}
+field_list:
+{% if field_list %}
+{% for item in field_list %}
+- name: {{ item.field_name }}
+{% endfor %}
+{% else %}
+- name:
+{% endif %}
+keyword_list:
+{% if keyword_list %}
+{% for item in keyword_list %}
+- name: {{ item.keyword }}
+{% endfor %}
+{% else %}
+- name:
+{% endif %}

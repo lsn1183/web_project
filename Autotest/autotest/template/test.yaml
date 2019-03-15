@@ -1,0 +1,79 @@
+---
+# is_catus 是否是从catus上拿的 true or false
+# dest_list 仕向地列表
+# intro 项目简介
+# field_list 自定义字段列表
+name: {{ name }}
+is_catus: {{ is_catus }}
+user_name: {{ user_name }}
+intro: {{ intro }}
+create_time: {{ create_time }}
+update_time: {{ update_time }}
+finish_time: {{ finish_time }}
+# introduce 仕向地简介
+# country_list 国家列表
+# data_provider 数据提供商
+# code 国家ISO_CODE
+# en_name 英文名称
+# cn_name 中文名称
+dest_list:
+{% if dest_list %}
+{% for item in dest_list %}
+- name: {{ item.name }}
+  introduce: {{ item.introduce }}
+  data_provider: {{ item.provider }}
+  country_list:
+  {% if item.country_list %}
+  {% for ct in item.country_list %}
+  - code: {{ ct.iso_code }}
+    en_name: {{ ct.eng_name }}
+    cn_name: {{ ct.cn_name }}
+  {% endfor %}
+  {% else %}
+  - code:
+    en_name:
+    cn_name:
+  {% endif %}
+{% endfor %}
+{% else %}
+- name:
+  introduce:
+  data_provider:
+  country_list:
+  - code:
+    en_name:
+    cn_name:
+{% endif %}
+# type 自定义字段的类型
+# is_show 是否默认显示 true or false
+# option_list 自定义选项列表
+field_list:
+{% if field_list %}
+{% for item in field_list %}
+- name: {{ item.field_name }}
+  type: {{ item.field_type }}
+  is_show: {{ item.field_show_when_execute }}
+  option_list:
+  {% if item.option_list %}
+  {% for ct in item.option_list %}
+  - value: {{ ct.value }}
+  {% endfor %}
+  {% else %}
+  - value:
+  {% endif %}
+{% endfor %}
+{% else %}
+- name:
+  type:
+  is_show:
+  option_list:
+  - value:
+{% endif %}
+keyword_list:
+{% if keyword_list %}
+{% for item in keyword_list %}
+- name: {{ item.keyword }}
+{% endfor %}
+{% else %}
+- name:
+{% endif %}

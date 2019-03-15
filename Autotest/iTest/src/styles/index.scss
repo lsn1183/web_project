@@ -1,0 +1,402 @@
+@import './element-ui.scss';
+@import './variables.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: '微软雅黑';
+    font-size: 12px;
+}
+
+#app {
+    height: 100%;
+}
+
+.btn-operate {
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500
+}
+
+.btn-operate:hover {
+    color: #42b983;
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #606266;
+}
+
+.operate-bar {
+    margin: 0 0 10px 0;
+}
+
+// .show-content {
+//     height: 100%;
+// }
+.country-manage {
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    right: 0;
+    bottom: 0;
+    // overflow-y: scroll;
+    // padding-right: 36px;
+    // padding-bottom:15px;
+}
+.test-case {
+    height: 100%;
+    position: relative;
+
+    .side-bar {
+        float: left;
+        width: 250px;
+        height: 100%;
+        overflow: scroll;
+        box-sizing: border-box;
+        padding: 15px 0 0 10px;
+
+        @media screen and (max-width: 1280px) {
+            width: 200px;
+        }
+        border-right: 2px solid rgba(216, 231, 223, 0.5);
+    }
+}
+@media screen and (max-width: 1024px) {
+    .collapsible .filters-content .filters-content-field .input-text {
+        margin-left: 0;
+        padding-left: 5px;
+    }
+}
+
+.content {
+    float: left;
+    width: calc(100% - 250px);
+    height: 100%;
+    padding: 20px 0 0 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+@media screen and (max-width: 1280px) {
+    .content {
+        width: calc(100% - 200px);
+    }
+}
+
+.operate-btn-bar {
+    float: right;
+    // font-size: 13px;
+    font-weight: normal;
+    // margin: 5px 0 0 0;
+    vertical-align: middle;
+
+    span:hover {
+        color: #42b983;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+.operate-header {
+    padding-right: 44px;
+    font-size: 14px;
+
+    .operate-header-title {
+        margin-bottom: 10px;
+
+        .title {
+            margin: 0;
+        }
+
+        .title-detail {
+            font-size: 12px;
+            color: #5e6d82;
+            text-align: left;
+            height: 20px;
+            line-height: 20px;
+        }
+    }
+
+    .wrapper-content-table {
+        width: 100%;
+        padding: 10px 0 0;
+    }
+
+    .fr {
+        float: right;
+    }
+}
+
+.collapsible {
+    position: relative;
+    border: 1px solid #e4e4e4;
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    border-width: 1px 0 0 0;
+
+    .add-filter {
+        float: right;
+        text-align: right;
+        vertical-align: top;
+        margin-top: 4px;
+    }
+
+    .filters-content {
+        .filters-content-field {
+            padding: 2px 0;
+            vertical-align: middle;
+
+            .filter-label {
+                display: inline-block;
+                width: 150px;
+                height: 28px;
+                line-height: 28px;
+
+                .input-checkbox {
+                    vertical-align: middle;
+                }
+            }
+
+            .filter-select {
+                max-width: 140px;
+                display: inline-block; // margin-right: 52px;
+            }
+
+            .input-checkbox {
+                vertical-align: middle;
+            }
+
+            .input-text {
+                padding: 1px 10px;
+                background-color: #fff;
+                color: #3d454c;
+                border-radius: 3px;
+                height: 26px;
+                border: 1px solid #e0e2e3;
+                margin: 0px;
+                margin-left: 5%;
+
+                @media screen and(max-width: 1280px) {
+                    margin-left: 1%;
+                }
+
+                @media screen and(max-width: 1024px) {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+
+.filter-option-bar {
+    margin: 0px 0 20px 0;
+    float: left;
+
+    .filter-option-bar-btn {
+        color: #42b983;
+        padding: 0 10px 0;
+        cursor: pointer;
+        font-size: 14px
+    }
+}
+
+
+.btn-footer {
+    float: right;
+    margin: 20px 0 20px;
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .wrapper-content-show-page {
+        position: absolute;
+        top: 55px;
+        right: 0;
+        left: 0;
+        bottom: 85px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding-right: 36px;
+    }
+
+    .wrapper-content-show-page-ex {
+        bottom: 10px;
+    }
+
+    .wrapper-content {
+        position: absolute;
+        top: 39px;
+        right: 0;
+        left: 0;
+        bottom: 85px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding-right: 36px;
+
+        .wrapper-content-form {
+            padding: 15px 15px 0 15px;
+            // background: #f6f6f6; // 保留的颜色，以后可能会用回来
+            background-color: #F9FDFC;
+            border: solid 1px #e0e2e3;
+            border-radius: 3px;
+
+            .wrapper-content-form-content {
+                width: 600px;
+
+            }
+
+            .wrapper-content-form-content-item {
+                width: 600px;
+            }
+
+            .wrapper-content-form-content-ex {
+                width: 100%;
+            }
+        }
+
+        .local-form-div {
+            margin-left: 20px;
+            font-size: 14px;
+            color: #606266
+        }
+
+        .local-form-input {
+            padding-left: 20px;
+            margin: 22px 0 22px 0;
+        }
+
+        .wrapper-content-background {
+            margin-top: 20px;
+            padding: 15px;
+            // background: #f6f6f6; // 保留的颜色，以后可能会用回来
+            background-color: #F9FDFC;
+            border: solid 1px #e0e2e3;
+            border-radius: 3px;
+            width: 100%;
+            min-width: 100px;
+
+            .wrapper-content-filter-title {
+                font-size: 14px;
+                color: #606266;
+            }
+
+            .wrapper-content-filter-content {
+                padding: 10px 0 0;
+            }
+
+
+        }
+    }
+
+    .wrapper-content-ex {
+        position: absolute;
+        top: 39px;
+        right: 0;
+        left: 0;
+        bottom: 85px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding-right: 36px;
+
+        .wrapper-content-background {
+            margin-top: 20px;
+            padding: 15px;
+            // background: #f6f6f6; // 保留的颜色，以后可能会用回来
+            background-color: #F9FDFC;
+            border: solid 1px #e0e2e3;
+            border-radius: 3px;
+            width: 100%;
+            min-width: 100px;
+
+            .wrapper-content-filter-title {
+                font-size: 14px;
+                color: #606266;
+            }
+
+            .wrapper-content-filter-content {
+                padding: 10px 0 0;
+            }
+        }
+    }
+
+    // list页面的content模块清除绝对定位
+    .wrapper-footer-btn {
+        position: absolute;
+        width: 100%;
+        bottom: 20px;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 44px;
+    }
+
+    .wrapper-footer-pagination {
+        position: absolute;
+        width: 100%;
+        bottom: 20px;
+        padding-right: 36px;
+    }
+}
+
+table th {
+    background-color: #ECF9F5;
+}
+
+// homepage
+.app-wrapper .select {
+    top: -4px
+}
+
+.test-case-content {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    right: 0;
+    bottom: 0;
+    // padding-right: 36px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    height: 50px;
+    outline-offset: -2px;
+    outline: 2px solid rgb(243, 243, 243);
+    // -webkit-border-radius: 4px;
+    border: 2px solid rgb(243, 243, 243);
+}
+
+/*--- Click the scroll bar to display the style --*/
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #ccc;
+    height: 50px;
+    // -webkit-border-radius: 4px;
+}
+
+/*---Scroll bar size--*/
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+/*---滚动框背景样式--*/
+
+::-webkit-scrollbar-track-piece {
+    background-color: #fff;
+    // -webkit-border-radius: 0;
+}

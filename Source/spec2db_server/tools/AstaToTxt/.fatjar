@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Wed Dec 27 20:11:29 CST 2017
+onejar.license.required=false
+excludes=<po|AstaToTxt>~astah-pro.jar;<po|AstaToTxt>~slf4j-api-1.6.6.jar;<jar|astah-api.jar>;<jar|astah-pro.jar>;<jar|slf4j-api-1.6.6.jar>
+manifest.removesigners=true
+manifest.mergeall=true
+includes=
+onejar.checkbox=false
+onejar.expand=
+manifest.classpath=. astah-pro.jar slf4j-api-1.6.6.jar
+jarname=C\:\\proj\\Spec2DB\\Source\\spec2db_server\\tools\\AstaToTxt\\AstaToTxt_fat.jar
+jarname.isextern=true
+manifest.file=<createnew>
+manifest.mainclass=main.astah_check_it_needed

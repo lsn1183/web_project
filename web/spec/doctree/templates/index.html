@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Specification</title>
+
+    <link href="/static/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/jstree/3.3.4/themes/default/style.min.css" rel="stylesheet">
+
+
+    <link href="/static/dashboard.css" rel="stylesheet">
+    <link href="/static/custom.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <ul id="myTabs" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#search" id="searchTab" data-toggle="tab">Search</a>
+                </li>
+                <li>
+                    <a href="#specification" id="specificationTab" data-toggle="tab">Specification</a></li>
+                <li>
+                    <a href="#operation" id="operationTab" data-toggle="tab">Operation</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="/doctree/signout.html">Logout</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<div class="tab-content">
+
+    <div id="search" class="tab-pane fade active in">
+        <br>
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#specification_search">机能式样书搜索</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#req_spec_search">要求式样书搜索</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#func_search">全局搜索</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <p>
+                    <div id="specification_search" class="tab-pane fade  active in">
+                        <input type="hidden" value="1">
+                        输入机能式样书章节号、章节名
+                    </div>
+                    <div id="req_spec_search" class="tab-pane fade">
+                        <input type="hidden" value="2">
+                        输入要求式样书标题关键字
+                    </div>
+                    <div id="func_search" class="tab-pane fade">
+                        <input type="hidden" value="3">
+                        输入关键字
+                    </div>
+                    </p>
+                </div>
+                <div class="input-group">
+                    <input id="searchKey" type="text" class="form-control">
+                    <span class="input-group-btn"><button class="btn btn-default" type="button">Search</button></span>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="searchResult"></div>
+
+    </div>
+
+    <div id="specification" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 sidebar">
+                    <input type="text" id="searchCatalogTree" value="" placeholder="search catalog">
+                    <div id="catalogTree">
+                    </div>
+                </div>
+                <div class="col-md-9 col-md-offset-3 main">
+                    <div id="main">
+                    </div>
+                </div>
+                <div id="modal1">
+                </div>
+                <div id="modal2">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="operation" class="tab-pane fade">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 sidebar">
+                    <input type="text" id="opeSearchCatalogTree" value="" placeholder="search catalog">
+                    <div id="opeCatalogTree">
+                    </div>
+                </div>
+                <div class="col-md-9 col-md-offset-3 main">
+                    <div id="ope-main">
+                    </div>
+                </div>
+                <div id="ope-modal1">
+                </div>
+                <div id="ope-modal2">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/static/jquery/3.2.1/jquery.min.js"></script>
+<script src="/static/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/static/jstree/3.3.4/jstree.min.js"></script>
+<script src="/static/custom.js"></script>
+</body>
+</html>

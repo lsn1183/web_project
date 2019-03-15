@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title></title>
+
+    <link href="/static/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/jstree/3.3.4/themes/default/style.min.css" rel="stylesheet">
+
+
+    <link href="/static/dashboard.css" rel="stylesheet">
+    <link href="/static/dataView.css" rel="stylesheet">
+    <link href="/static/custom.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="nav-title">
+                <span></span>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Help</a></li>
+                    <!--<li><a href="/doctree/signout.html">Logout</a></li>-->
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="tab-content">
+        <div class="tab-pane fade active in">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3 sidebar">
+                        <input type="text" id="searchCatalogTree" value="" placeholder="search catalog">
+                        <div id="catalogTree">
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-md-offset-3 main">
+                        <div id="main">
+                            <div class="definition-view">
+                                <div class="view-name">1</div>
+                                <button type="button" class="btn btn-primary editor-btn" data-status="editor" data-model="definition" onclick="click_editor(event)">Editor</button>
+                                <table id="def-table-0" class="table table-striped table-bordered pre-scrollable">
+                                    <tbody>
+                                        <tr>
+                                            <td class="key-all">担当者</td>
+                                            <td class="var-value" data-key="author_name" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">H/U要件定義ID</td>
+                                            <td class="var-value" data-key="hu_def_id" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">TAGL要件定義ID</td>
+                                            <td class="var-value" data-key="requirement_id" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">ユニークID</td>
+                                            <td class="var-value" data-key="unique_id" contenteditable="false"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#def-table-1-container">H/U要件定義書から転記</button>
+                                <div id="def-table-1-container" class="collapse in">
+                                    <table id="def-table-1" class="table table-striped table-bordered pre-scrollable">
+                                        <tbody>
+                                            <tr>
+                                                <td class="key-all" colspan="2">大分類</td>
+                                                <td class="var-value" data-key="major_category" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-all" colspan="2">中分類</td>
+                                                <td class="var-value" data-key="medium_catetory" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-all" colspan="2">小分類</td>
+                                                <td class="var-value" data-key="small_category" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-all" colspan="2">詳細</td>
+                                                <td class="var-value" data-key="detail" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-all" colspan="2">基本要件</td>
+                                                <td class="var-value" data-key="base" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-all" colspan="2">関連基本要件</td>
+                                                <td class="var-value" data-key="rel_requiremant" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" rowspan="3">DCU</td>
+                                                <td class="key-half">状態</td>
+                                                <td class="var-value" data-key="dcu_status" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">トリガー</td>
+                                                <td class="var-value" data-key="dcu_trigger" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">動作</td>
+                                                <td class="var-value" data-key="dcu_action" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-all" colspan="2">備考(HU要件定義)</td>
+                                                <td class="var-value" data-key="hu_req_remark" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-all" colspan="2">DCU/MEUどちらの想定か</td>
+                                                <td class="var-value" data-key="dcu_meu" contenteditable="false"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </br>
+                                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#def-table-2-container">責務分担</button>
+                                <div id="def-table-2-container" class="collapse in">
+                                    <table id="def-table-2" class="table table-striped table-bordered pre-scrollable">
+                                        <tbody>
+                                            <tr>
+                                                <td class="key-half" rowspan="3">TAGL-PF</td>
+                                                <td class="key-half">状態</td>
+                                                <td class="var-value" data-key="pf_status" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">トリガー</td>
+                                                <td class="var-value" data-key="pf_trigger" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">動作</td>
+                                                <td class="var-value" data-key="pf_action" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" rowspan="26">抽象デバイス</td>
+                                                <td class="key-half">電源管理デバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">AVCLAN制御デバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">MOST制御デバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">CAN制御デバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">ジカ線入力デバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">揮発メモリデバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">不揮発メモリデバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">音声出力デバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">音声入力セレクタデバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">BTデバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">WIFIデバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">タッチパネル制御デバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">タッチパッド制御デバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">ロータリースイッチ、キースイッチ検出デバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">GPSデバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">Radioチューナーデバイス（XM、DAB含む）</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">地デジチューナーデバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">セキュリティチップデバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">マイク用ADCデバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">DVD映像デコーダデバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">映像信号入力セレクタデバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">映像信号出力デバイス(DCU→各ディスプレイ/ MEU→DCU)</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">CD/DVD/BD制御デバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">ECNCデバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">USB2.0-Host/Functionデバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half">APPLE認証デバイス</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="key-all" colspan="2">備考</td>
+                                                <td class="var-value" data-key="remark" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-all" colspan="2">責務分担の特記事項</td>
+                                                <td class="var-value" data-key="notice" contenteditable="false"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </br>
+                                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#def-table-3-container">参考文献</button>
+                                <div id="def-table-3-container" class="collapse in">
+                                    <table id="def-table-3" class="table table-striped table-bordered pre-scrollable">
+                                        <tbody>
+                                            <tr>
+                                                <td class="key-all">参考ウォークスルー図</td>
+                                                <td class="var-value" data-key="rel_flow_diagram" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-all">参考HAL設計書</td>
+                                                <td class="var-value" data-key="rel_hal_design" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-all">その他仕様（リファハード仕様等）</td>
+                                                <td class="var-value" data-key="other_spec" contenteditable="false"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </br>
+                                <table id="def-table-4" class="table table-striped table-bordered pre-scrollable">
+                                    <tbody>
+                                        <tr>
+                                            <td class="key-all">リファレンスハード上での実現可否</td>
+                                            <td class="var-value" data-key="implementation" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">詳細分析可否</td>
+                                            <td class="var-value" data-key="analysis" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">未要件分析</td>
+                                            <td class="var-value" data-key="unrequire" contenteditable="false"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="analysis-view">
+                                <div class="view-name"></div>
+                                <button type="button" class="btn btn-primary editor-btn" data-status="editor" data-model="analysis" onclick="click_editor(event)">Editor</button>
+                                <table class="table table-striped table-bordered pre-scrollable">
+                                    <tbody>
+                                        <tr>
+                                            <td class="key-all">担当者</td>
+                                            <td class="var-value" data-key="author_name" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">TAGL要件定義ID</td>
+                                            <td class="var-value" data-key="requirement_id" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">ユニークID</td>
+                                            <td class="var-value" data-key="unique_id" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">大分類</td>
+                                            <td class="var-value" data-key="major_category" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">中分類</td>
+                                            <td class="var-value" data-key="medium_catetory" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">小分類</td>
+                                            <td class="var-value" data-key="small_category" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">詳細</td>
+                                            <td class="var-value" data-key="detail" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">基本要件</td>
+                                            <td class="var-value" data-key="base" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">関連基本要件</td>
+                                            <td class="var-value" data-key="rel_requiremant" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">除外</td>
+                                            <td class="var-value" data-key="exception" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">TAGL-PF</td>
+                                            <td class="var-value" data-key="" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">DCU/MEUどちらの要件か</td>
+                                            <td class="var-value" data-key="dcu_meu" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">状態</td>
+                                            <td class="var-value" data-key="pf_status" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">トリガー</td>
+                                            <td class="var-value" data-key="fp_trigger" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">動作</td>
+                                            <td class="var-value" data-key="pf_action" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">シーケンス図</td>
+                                            <td class="var-value" data-key="seq_diagram" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">補足参照仕様書</td>
+                                            <td class="var-value" data-key="supple_spec" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">未検証</td>
+                                            <td class="var-value" data-key="uncheck" contenteditable="false"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="key-all">備考</td>
+                                            <td class="var-value" data-key="remark" contenteditable="false"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#anls-table-2-container">責務分担</button>
+                                <div id="anls-table-2-container" class="collapse in">
+                                    <table id="anls-table-2" class="table table-striped table-bordered pre-scrollable">
+                                        <tbody>
+                                            <tr>
+                                                <td class="key-all" colspan="4">アプリケーション</td>
+                                                <td class="var-value" data-key="application" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-all" colspan="4">kernel</td>
+                                                <td class="var-value" data-key="kernel" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-all" colspan="4">systemd</td>
+                                                <td class="var-value" data-key="systemd" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" rowspan="46">BaseSystem</td>
+                                                <td class="key-quarter" rowspan="11">System Service</td>
+                                                <td class="key-half" colspan="2">System Manager</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Device Detection Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Window System</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Logger Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Resouce Manager</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Task Manager</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Update Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Font</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Mounter</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Power Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Graphics</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" rowspan="8">Native Service</td>
+                                                <td class="key-half" colspan="2">NPP Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Image Storage</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Framework Unified</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Shared Mem</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Lock Manager</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Backup Manager</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">libextention</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">libcommon</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" rowspan="18">Peripheral Service</td>
+                                                <td class="key-half" colspan="2">communication</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">CommSH4</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">CommUSB</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">sysupdate</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">PSMShadow</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Lanserver</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Switch Handler</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">CANGW_M</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">CANGW_S</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">amigovup</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">CDR</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">ExtUnitAuth</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Logger Shadow</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Proxy Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Positioning</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">IPC</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">IPC_MP Shadow</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">MOSTShadow</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" rowspan="3">Vehicle Service</td>
+                                                <td class="key-half" colspan="2">clock</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Diag Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">vehicle</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" rowspan="3">Audio Service</td>
+                                                <td class="key-half" colspan="2">Mic Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Sound Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">ALSA</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" rowspan="3">OtherServices</td>
+                                                <td class="key-half" colspan="2">libev</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">librpc</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">libPosixBasedOS001legacy</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2" rowspan="6">Application Management</td>
+                                                <td class="key-half" colspan="2">Mode Manager</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Arbitration Manager</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Display Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Audio Manager</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">System App (Startup)</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Window Manager</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" rowspan="37">Application Service</td>
+                                                <td class="key-quarter" rowspan="5">Multimedia</td>
+                                                <td class="key-quarter">media</td>
+                                                <td class="key-quarter">Media Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">Radio</td>
+                                                <td class="key-quarter">Radio Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" rowspan="3">dtv</td>
+                                                <td class="key-quarter">DTV Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">DTV Server</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">DTV vupservice</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" rowspan="8">Connectivity</td>
+                                                <td class="key-quarter" rowspan="6">ConnBT</td>
+                                                <td class="key-quarter">BT connection Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">BT Messaging Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">BT PhoneBook Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">BT TelBLL Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">BT Phone Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">DCM Phone Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">aoa</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">Wlan Middle Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" rowspan="9">Vehicle</td>
+                                                <td class="key-quarter" colspan="2">Diagnosis</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">Energy Monitor</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">Fuel Consumption</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">DMS</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">Seat</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">Camera</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">Aircon</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">Cutomize</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">Meter</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" rowspan="15">Misc</td>
+                                                <td class="key-quarter" rowspan="4">Setting</td>
+                                                <td class="key-quarter">Delete Personal Data</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">Info Setting</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">Menu Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">Setting</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" rowspan="3">ConnUtilityService</td>
+                                                <td class="key-quarter">ConnMgr</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">ConnUtil</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">Service FlagMgr</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" rowspan="2">CommArb</td>
+                                                <td class="key-quarter">CommArbMEU</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter">CommArbDCU</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">Contents Manager</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">Network Manager</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">Misink</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">Software Update</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">Data Services</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-quarter" colspan="2">SPC Services</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" rowspan="3" colspan="2">Application Framework</td>
+                                                <td class="key-half" colspan="2">Status Bar</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Notify Service</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="key-half" colspan="2">Trinity</td>
+                                                <td class="var-value" data-key="vals" contenteditable="false"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/static/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/jstree/3.3.4/jstree.min.js"></script>
+    <script src="/static/dataView.js"></script>
+</body>
+
+</html>

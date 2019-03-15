@@ -1,0 +1,48 @@
+
+
+[
+	{
+	  name: "通用",
+	  "sub": [{
+			"item_id": xx
+			name: "映像",
+			sub:[{
+				"item_id": oo
+				"name": "映像が表示されたまま",
+				 sub: []
+				 "scenes": [{scene_id: scene_1, scene: 场景1, drbfm_content: "drbfm填写内容"},
+							{scene_id: scene_2, scene: 场景2, drbfm_content: "drbfm填写内容"},
+							{scene_id: scene_3, scene: 场景3, drbfm_content: "drbfm填写内容"},
+				 ]
+				},
+				{"name": "映像が表示されない",
+				 "scenes": [{scene_id: scene_1, scene: 场景1, drbfm_content: "drbfm填写内容"},
+							{scene_id: scene_2, scene: 场景2, drbfm_content: "drbfm填写内容"},
+							{scene_id: scene_3, scene: 场景3, drbfm_content: "drbfm填写内容"},
+				 ]
+				},
+				...
+				]
+			},
+			{
+			name: "音声",
+			sub:[{"name": "音声がでない",
+				 "scenes": [{scene_id: scene_1, scene: 场景1, drbfm_content: "drbfm填写内容"},
+							{scene_id: scene_2, scene: 场景2, drbfm_content: "drbfm填写内容"},
+							{scene_id: scene_3, scene: 场景3, drbfm_content: "drbfm填写内容"},
+				 ]
+				},
+				{"name": "音声がとまらない",
+				 "scenes": [{scene_id: scene_1, scene: 场景1, drbfm_content: "drbfm填写内容"},
+							{scene_id: scene_2, scene: 场景2, drbfm_content: "drbfm填写内容"},
+							{scene_id: scene_3, scene: 场景3, drbfm_content: "drbfm填写内容"},
+				 ]
+				},
+				...
+				]
+			},
+			...
+	 ]
+	},
+	...
+]

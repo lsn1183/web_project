@@ -1,0 +1,7 @@
+[{
+  "name": "Navi",
+  "postion": "(0, 1),(2, 3)",
+  "childlayers": ["path"],
+  "modules": ["AppFramework"]
+}
+]

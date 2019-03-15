@@ -1,0 +1,26 @@
+后端正式
+1. 先进入python3虚拟环境
+	cd /workspace/Spec2DB/Source/collaboration_2
+	source py3env/bin/activate
+	
+2. 再用虚拟环境启动
+   python start.py
+   
+前端正式：
+	cd /home/pset/workspace/Spec2DB/MapWork
+	./build.sh
+	
+
+后端测试
+1. 先进入python3虚拟环境
+	cd /workspace/Spec2DB_Dev/Source/collaboration_2
+	source py3env/bin/activate
+	
+2. 再用虚拟环境启动
+   python start.py
+   
+   
+前端测试：
+	cd /home/pset/workspace/Spec2DB_Dev/MapWork
+	npm rum dev
+	

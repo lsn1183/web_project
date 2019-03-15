@@ -1,0 +1,2 @@
+# config file of project
+db=host='192.168.0.56' dbname='spec2db_1120' port='5432' user='postgres' password='pset123456'

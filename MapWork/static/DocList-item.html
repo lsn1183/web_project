@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./js/jquery-1.8.3.min.js"></script>
+  <title>文档列表信息查阅</title>
+</head>
+
+<body oncontextmenu = "return false" oncopy = "return false" >
+    <noscript>
+        <iframe src="*.htm"></iframe>
+    </noscript>
+  <div class="header">
+  </div>
+  <div class="body" >
+    <div class="left">
+      <h2>查阅的内容 <span class="title_num"></span></h2>
+      <p style="border-bottom: 1px dashed #89a58b;width: 99%"></p>
+      <p class="two_title_size"><i class="title_image "></i>标题：</p>
+      <span id="left_title" class="content"></span>
+      <!-- <span class="title_num"></span> -->
+      <p class="" style="border-bottom: 1px dashed #89a58b;width: 99%"></p>
+
+      <p class="two_title_size"><i class="title_image "></i>子分类：</p>
+      <span class="sub_cat content"></span>
+      <!-- <span class="title_num"></span> -->
+      <p class="" style="border-bottom: 1px dashed #89a58b;width: 99%"></p>
+
+      <i class="title_image1"></i>
+      <p class="two_title_size">摘要： </p>
+      <span class="summary content"></span>
+
+      <p style="border-bottom: 1px dashed #89a58b;width: 99%"></p>
+
+      <i class="title_image2"></i>
+      <p class="two_title_size">正文：</p>
+      <div class="contentText">
+        <p class="three_title_size">文本：
+          <span class="content_text "></span>
+        </p>
+        <p class="three_title_size">链接：
+          <a class="path_url"></a>
+        </p>
+        <p class="three_title_size">文件：
+          <span class="file_url"></span>
+        </p>
+      </div>
+      <p style="border-bottom: 1px dashed #89a58b;width: 99%"></p>
+      <div class="footer">
+        <div class="footer_label">
+          <p class="three_title_size">关键字：
+            <span class="keywords"></span>
+          </p>
+          <p class="three_title_size">创建时间：
+            <span class="create_time"></span>
+          </p>
+        </div>
+        <div class="footer_label">
+          <p class="three_title_size">版本：
+            <span class="ver"></span>
+          </p>
+          <p class="three_title_size">提交人：
+            <span class="committer"></span>
+          </p>
+        </div>
+
+      </div>
+      <div style="clear: both;"></div>
+      <p style="border-bottom: 1px dashed #89a58b;width: 99%"></p>
+      <dir class="footer_list">
+        <p class="two_title_size"><i class="title_image"></i>failure mode：</p>
+        <ul class="ul_failure_mode">
+        </ul>
+      </dir>
+      <dir class="footer_list">
+        <p class="two_title_size"><i class="title_image"></i>考虑点：</p>
+        <ul class="ul_consider">
+        </ul>
+      </dir>
+    </div>
+
+    <div class="right">
+      <h4>Tag:</h4>
+      <ul class="ul_list">
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  var fileUrl = '';
+  var pathUrl = '';
+  (function () {
+    // let data = JSON.parse(window.sessionStorage.getItem("listDocID"));
+    document.onselectstart = function(){
+        return false;
+    }
+    var id = JSON.parse(window.sessionStorage.getItem("listDocID")).data.doc_id
+    var serverIp = JSON.parse(window.sessionStorage.getItem("listDocID")).server_ip
+    $.get(serverIp + "/Doc/" + id, function (data, res) {
+      if (res == "success") {
+        // console.log(data,'req-data')
+        var req_content = data.content
+        // console.log(req_content,'-----------')
+        $('#left_title').append(req_content.doc_title);
+        $(".title_num")[0].innerHTML = '(文档编号：' + req_content.doc_id + ')';
+        $(".summary")[0].innerHTML = req_content.summary;
+        $(".sub_cat")[0].innerHTML = req_content.sub_cat;
+        // 反斜杠转为<br>：
+        if (req_content.content != null) {
+          $(".content_text")[0].innerHTML = req_content.content.replace(/\r?\n/g, "<br />");
+        }
+        $(".path_url")[0].innerHTML = req_content.path;
+        if (req_content.file_name) {
+            $(".file_url")[0].innerHTML = req_content.file_name;
+        }
+        $(".keywords")[0].innerHTML = req_content.keywords;
+        $(".create_time")[0].innerHTML = req_content.create_time;
+        $(".ver")[0].innerHTML = req_content.ver;
+        $(".committer")[0].innerHTML = req_content.committer;
+        if (req_content.tags.length != 0) {
+          for (let i = 0; i < req_content.tags.length; i++) {
+            var li = document.createElement("li");
+            li.innerHTML = req_content.tags[i].tag;
+            $('.ul_list').append(li)
+          }
+        } else {
+          var p = document.createElement("p");
+          p.innerHTML = "此条内容无Tag";
+        };
+        if (req_content.considers.length != 0) {
+          for (let i = 0; i < req_content.considers.length; i++) {
+            var li = document.createElement("li");
+            li.innerHTML = i + 1 + "--" + req_content.considers[i].consider_name;
+            $('.ul_consider').append(li)
+          }
+        } else {
+          var p = document.createElement("p");
+          p.innerHTML = "无内容";
+        };
+        if (req_content.failure_mode.length != 0) {
+          for (let i = 0; i < req_content.failure_mode.length; i++) {
+            var li = document.createElement("li");
+            li.innerHTML = i + 1 + "--" + req_content.failure_mode[i].failure_mode_name;
+            $('.ul_failure_mode').append(li)
+          }
+        } else {
+          var p = document.createElement("p");
+          p.innerHTML = "无内容";
+        };
+        if (req_content.file != null || req_content.file != '') {
+          fileUrl = req_content.file
+        }
+        if (req_content.path != null || req_content.path != '') {
+            pathUrl = req_content.path
+        }
+      }
+    });
+  }());
+  $(".file_url").click(function () {
+    window.open(fileUrl)
+  })
+  $(".path_url").click(function () {
+    window.open(pathUrl)
+  })
+
+</script>
+<style>
+  /* 主体 */
+
+  .body {
+    margin: 0;
+    width: 95%;
+    margin-left: 5%;
+    font-family: "微软雅黑";
+    border-left: 2px solid #42b983;
+    border-right: 2px solid #42b983;
+    overflow-y: auto;
+    color: #606266
+  }
+
+  .left {
+    float: left;
+    width: 70%;
+    padding: 0% 2% 0;
+  }
+
+  h2 {
+    font-size: 22px;
+    color: #6bcca0;
+  }
+
+  .left span {
+    font-size: 14px;
+  }
+
+  .contentText span {
+    font-size: 14px;
+  }
+
+  .contentText {
+    padding-left: 2%;
+  }
+
+  .footer {
+    padding-left: 2%;
+  }
+
+  .file_url {
+    cursor: pointer;
+  }
+  .path_url {
+    cursor: pointer;
+  }
+  .title_image {
+    display: inline-block;
+    position: absolute;
+    left: 5.18%;
+    width: 10px;
+    height: 30px;
+    background-image: url(xiantiao.png);
+  }
+
+  .title_image1 {
+    background-image: url(xiantiao.png);
+    display: inline-block;
+    width: 10px;
+    height: 30px;
+    position: absolute;
+    left: 5.18%;
+  }
+
+  .title_image2 {
+    background-image: url(xiantiao.png);
+    display: inline-block;
+    width: 10px;
+    height: 30px;
+    position: absolute;
+    left: 5.18%;
+  }
+
+  .three_title_size {
+    font-size: 16px
+  }
+
+  .content_text {
+
+    line-height: 24px
+  }
+
+  .body .right {
+    width: 20%;
+    float: left;
+    padding: .5% 1% 0;
+    color: #42b983;
+  }
+
+  .body .right .ul_list {
+    margin: 0;
+    padding-left: 3%;
+  }
+
+  .body .right li {
+    list-style: none;
+    width: 130px;
+    height: 35px;
+    line-height: 30px;
+    background-image: url(jiantou.png);
+    background-size: 125px 30px;
+    background-repeat: no-repeat;
+    font-size: 14px;
+    margin: 2% 0 2%;
+    text-align: center
+  }
+
+  .footer .footer_label {
+    float: left;
+    width: 50%;
+    line-height: 30px;
+  }
+
+  .body .footer_list {
+    margin: 0;
+    padding: 0;
+
+  }
+
+  .footer .footer_list ul {
+    margin: 0;
+  }
+
+  .footer .footer_list ul li {
+    list-style: none;
+  }
+
+  .two_title_size {
+    font-size: 18px
+  }
+
+  .ul_consider {
+    font-size: 16px
+  }
+
+  .content {
+    padding-left: 20px;
+  }
+
+</style>

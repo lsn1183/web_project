@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试用例执行详细</title>
+</head>
+
+<body>
+    <div class="content">
+
+        <table>
+            <tr>
+                <th colspan="6" class="table-title title-name"></th>
+
+            </tr>
+            <tr>
+                <td class="left-title">作者:</td>
+                <td colspan="5" class="charger"></td>
+             
+            </tr>
+
+            <tr>
+                <td class="left-title">摘要:</td>
+                <td colspan="5" class="summary-name"></td>
+
+            </tr>
+            <tr>
+                <td class="left-title">时间:</td>
+                <td colspan="5" class="update-time"></td>
+            </tr>
+            <tr class="tr-list-title">
+                <td class="left-title ">#:</td>
+                <td>步骤动作:</td>
+                <td>期望的结果:</td>
+                <td>执行纪要:</td>
+                <td>执行状态:</td>
+            </tr>
+            
+            <tr>
+                <td class="left-title">测试方式:</td>
+                <td colspan="5" class="automatically"></td>
+            </tr>
+           
+            <tr>
+                <td class="left-title">重要性:</td>
+                <td colspan="5" class="importance"></td>
+            </tr>
+            
+            <tr>
+                <td class="details left-title">执行详情:</td>
+                <td colspan="5" class="details"></td>
+            </tr>
+            <tr>
+                <td class="left-title">测试者:</td>
+                <td colspan="5" class="commter"></td>
+            </tr>
+            <tr>
+                <td class="left-title">执行结果:</td>
+                <td colspan="5" class="result-value"></td>
+            </tr>
+
+            <tr>
+                <td class="left-title">执行方式:</td>
+                <td colspan="5" class="test-mode"></td>
+            </tr>
+            
+        </table>
+
+    </div>
+
+</body>
+<script src="./js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    var server_ip = '',
+        id = null,
+        req_data = null;
+    (function () {
+        let session_data = JSON.parse(sessionStorage.getItem('case_details_data'))
+        server_ip = session_data.server_ip
+        id = session_data.id;
+        // console.log(session_data, 'aaaa')
+        $.get(server_ip + "api/1.0/testcase/TestresultHistoryOne/" + id, function (data, res) {
+            console.log(data, res)
+            if (res == "success") {
+                let req_data = data.result
+                $(".title-name")[0].innerHTML = req_data.title + '[' + '版本：' + req_data.version +
+                    ']';
+                $(".charger")[0].innerHTML = req_data.charger;
+                $(".update-time")[0].innerHTML = req_data.updatetime;
+                $(".result-value")[0].innerHTML = req_data.result_value;
+                $(".test-mode")[0].innerHTML = req_data.test_mode;
+                $(".commter")[0].innerHTML = req_data.commter;
+                $(".importance")[0].innerHTML = req_data.importance;
+                $(".summary-name")[0].innerHTML = req_data.abstract;
+                if (req_data.step_list[0].is_automatically == true) {
+                    $(".automatically")[0].innerHTML = '自动';
+                } else {
+                    $(".automatically")[0].innerHTML = '手动';
+                }
+                if (req_data.step_list.length != 0) {
+                    let step_list = req_data.step_list;
+                    for (let i = 0, len = step_list.length; i < len; i++) {
+                        $('.tr-list-title').after(
+                            "<tr >" +
+                            "<td class= 'left-title' >" + (i + 1) + '</td>' +
+                            '<td>' + step_list[i].operate + '</td>' +
+                            '<td>' + step_list[i].expected_value + '</td>' +
+                            '<td>' + step_list[i].remark + '</td>' +
+                            '<td>' + step_list[i].state + '</td>' +
+                            '</tr>'
+                        )
+                    }
+                }
+
+            }
+
+        });
+
+    }());
+</script>
+</html>
+<style>
+    .content {
+        padding: 60px 10% 20px 10%;
+        /* width: 100%; */
+
+    }
+
+    .left-title {
+        max-width: 50px;
+    }
+
+    table {
+        font-family: verdana, arial, sans-serif;
+        font-size: 12px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #DDD;
+        border-collapse: collapse;
+    }
+
+    table {
+        width: 100%;
+        min-width: 400px;
+    }
+
+    table th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #DDD;
+        /* background-color: #EEE; */
+        background-color: #ECF9F5;
+
+        border-collapse: collapse;
+    }
+
+    table td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #DDD;
+        background-color: #ffffff;
+        border-collapse: collapse;
+    }
+
+    table tr>.details {
+        background-color: #ECF9F5;
+        
+
+    }
+
+    table .table-title {
+        text-align: left
+    }
+
+</style>

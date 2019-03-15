@@ -1,0 +1,49 @@
+.definition-view, .analysis-view {
+    display: none;
+}
+
+
+
+.editor-btn {
+    float: right;
+    margin: 2px 5px;
+}
+
+.analysis p,.definition p {
+    margin: 0;
+    word-break: break-word;
+}
+
+.nav-title {
+    float: left;
+}
+
+.nav-title span {
+    color: white;
+    font-size: 30px;
+}
+
+.view-name {
+    font-size: 40px;
+}
+
+.definition-view button, .analysis-view button {
+    margin: 10px 0;
+}
+
+/*table*/
+.key-all {
+    width: 50%;
+}
+
+.key-half {
+    width: 25%;
+}
+
+.key-quarter {
+    width: 12.5%;
+}
+
+.var-value {
+    word-break: break-word;
+}
