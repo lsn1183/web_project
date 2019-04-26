@@ -1,0 +1,57 @@
+@back-color-1: rgb(201, 255, 255); //淡蓝色
+@back-color-2: rgb(255, 205, 156); //淡褐色
+@back-color-3: rgb(255, 255, 153); //淡黄色
+@back-color-4: rgb(204, 255, 204); //淡绿色
+@back-color-5: rgb(255, 255, 255); //白色
+
+.handsontable {
+
+  /* 设置表头第二行背景颜色 */
+  thead tr:nth-child(3) th {
+    background-color: @back-color-2;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  thead tr:nth-child(2) th:first-child,
+  thead tr:nth-child(3) th:first-child {
+    background-color: @back-color-1;
+  }
+
+  td:nth-child(1) {
+    background-color: @back-color-1;
+    font-weight: bold
+  }
+
+  /* 设置表格列的颜色 */
+  td:nth-child(2),
+  td:nth-child(3) {
+    background-color: @back-color-2;
+    font-weight: bold
+  }
+
+  td:nth-child(4),
+  td:nth-child(5) {
+    background-color: @back-color-4;
+  }
+
+  thead tr:nth-child(2) th:nth-child(18),
+  thead tr:nth-child(3) th:nth-child(18) {
+    background-color: @back-color-5;
+
+  }
+
+  /* 设置表格内容最后一列，文字超出自动隐藏 */
+  tbody tr td:nth-child(19) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    // display: -webkit-box;
+    /* 作为弹性伸缩盒子模型显示。 */
+    // -webkit-box-orient: ;
+    /* 设置伸缩盒子的子元素排列方式--从上到下垂直排列 */
+    // -webkit-line-clamp: 1;
+    /* 显示的行 */
+  }
+
+
+}

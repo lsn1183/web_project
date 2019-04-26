@@ -1,0 +1,34 @@
+.excel-container {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+.excel-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 50px;
+}
+.excel-main {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* height: calc(100% - 50px); */
+  overflow: hidden;
+}
+.fold {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  display: flex;
+}
+.title {
+  float: left;
+  font-size: 30px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-left: 10px;
+}

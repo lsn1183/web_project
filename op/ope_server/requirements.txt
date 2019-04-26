@@ -1,0 +1,14 @@
+Flask
+psycopg2
+sqlalchemy
+sqlalchemy_utils
+flask-sqlalchemy
+flask-restful
+flask-cors
+requests
+pandas
+flask_caching
+flask_httpauth
+flask-migrate
+flask-script
+
